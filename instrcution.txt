@@ -1,0 +1,92 @@
+1. created project on spring initializer- java,maven,17,
+    dependancies -
+    spring web
+    spring security
+    mysql river
+    lombok
+    java mail sender
+    jpa
+    validation
+    devtools
+
+ 2. created Frontend folder
+
+ 3. connecting mysql database
+    creation of db - created tables - users,otp_tokens
+                create database moneymanager;
+                use moneymanager;
+
+                CREATE TABLE users (
+                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    full_name VARCHAR(100) NOT NULL,
+                    email VARCHAR(150) NOT NULL UNIQUE,
+                    password_hash VARCHAR(255) NOT NULL,
+                    is_verified BOOLEAN DEFAULT FALSE,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                );
+
+                CREATE TABLE otp_tokens (
+                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    email VARCHAR(150) NOT NULL,
+                    otp_code VARCHAR(6) NOT NULL,
+                    expires_at DATETIME NOT NULL,
+                    is_used BOOLEAN DEFAULT FALSE,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                );
+
+                show tables;
+                desc users;
+                desc otp_tokens;
+
+    fill application.properties
+
+    create packages and write code
+                ├── entity/
+                │   ├── User.java
+                │   └── OtpToken.java
+                ├── repository/
+                │   ├── UserRepository.java
+                │   └── OtpTokenRepository.java
+                ├── dto/
+                │   ├── SignupRequest.java
+                │   ├── SigninRequest.java
+                │   ├── VerifyOtpRequest.java
+                │   ├── AuthResponse.java
+                │   ├── UserDto.java
+                │   └── ApiResponse.java
+                ├── security/
+                │   ├── JwtUtil.java
+                │   ├── JwtAuthFilter.java
+                │   └── SecurityConfig.java
+                ├── service/
+                │   ├── CustomUserDetailsService.java
+                │   ├── EmailService.java
+                │   └── AuthService.java
+                ├── controller/
+                    └── AuthController.java
+       ENTITY
+       user - id,fullname,email,password,createdat,updatedat,isverfied
+       tptoken- id,email,otpcode,createdat,expriedat,isused
+
+       REPOSITORY -
+       userrepo - findbyemail, existbyemail
+       otptoken - findTopByEmailAndIsUsedFalseOrderByCreatedAtDesc, deletebyemail
+
+       DTO
+       signuprequest - fullname (3-100),email,password (min-6),confirm password
+       signinrequest -email,password
+       verfiyotprequest - email,otp,newpassword,confirmnewpassword
+       userdto - fullname,email,id,createdat
+       apiresponse - success, message
+       authresponse - token,message ,user
+
+       SECURITY - jwtutils,jwtfilter,securityconfig
+
+       SERVICE - auth,email,userdetailcustom
+
+       CONTROLLER _
+       1. authcontroller (/api/auth)
+                post -signup,signin,forgotpassword,verifyotp
+                get - me
+                put - update name
