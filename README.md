@@ -239,5 +239,4 @@ Frontend starts at `http://localhost:3000`
 
 **Gayatri Nawale**
 
----
 
