@@ -90,3 +90,44 @@
                 post -signup,signin,forgotpassword,verifyotp
                 get - me
                 put - update name
+
+
+Project File Map
+🖥️ FRONTEND — moneymanager-frontend/src/
+FileLocationWhat it doesApp.jssrc/App.jsThe router. Decides which page to show for which URL. /signin → SigninPage, /home → HomePage etc.index.jssrc/index.jsEntry point. Just mounts the React app into the HTML page. You never edit this.AuthContext.jssrc/context/Global memory. Stores the logged-in user and token so every page can access it without passing props.AppShell.jssrc/components/The layout wrapper. Draws the sidebar + topbar. Every protected page is wrapped inside this.PrivateRoute.jssrc/components/Security guard. If user is not logged in and tries to visit /home, it redirects them to /signin.api.jssrc/api/All HTTP calls to backend in one place. Every page imports functions from here instead of writing fetch/axios calls themselves.SigninPage.jssrc/pages/Login form. Calls POST /api/auth/signin, saves token, redirects to /home.SignupPage.jssrc/pages/Register form. Calls POST /api/auth/signup.ForgotPasswordPage.jssrc/pages/Two steps — enter email → get OTP → reset password.HomePage.jssrc/pages/Dashboard placeholder. Will show charts and summary in Phase 2D.ProfilePage.jssrc/pages/Shows user info, lets them update name, logout, or delete account.AddEntryPage.jssrc/pages/3-tab form (Expense/Income/Saving). Calls POST /api/transactions to save.TransactionsPage.jssrc/pages/Table of all transactions with filters, sort, pagination, view/edit/delete modals, and PDF/Excel export.app.csssrc/styles/Global styles — sidebar, topbar, cards, buttons, modals, toast. Used everywhere.auth.csssrc/styles/Styles only for login/signup/forgot-password pages.addentry.csssrc/styles/Styles only for the Add Entry form page.profile.csssrc/styles/Styles only for the Profile page.transactions.csssrc/styles/Styles only for the Transactions page — table, filters, pagination, badges.
+
+BACKEND — src/main/java/com/gayatri/MoneyManager/
+📁 entity/ — Database table definitions
+FileWhat it doesUser.javaDefines the users table. Columns: id, full_name, email, password, isVerified, createdAt, updatedAt.OtpToken.javaDefines the otp_tokens table. Stores the OTP code + expiry for forgot-password flow.Transaction.javaDefines the transactions table. Columns: id, user_id, type (EXPENSE/INCOME/SAVING), amount, category, date, description. Also contains the TransactionType enum inside it.
+
+📁 dto/ — Data shapes for API requests and responses
+FileWhat it doesSignUpRequest.javaShape of data frontend sends when registering — fullName, email, password.SigninRequest.javaShape of data frontend sends when logging in — email, password.AuthResponse.javaShape of data backend sends back after login/signup — token + user info.ApiResponse.javaGeneric response wrapper — just { success: true, message: "..." }. Used for simple confirmations.UserDto.javaSafe user object sent to frontend — id, fullName, email. Never sends the password.VerifyOtpRequest.javaShape of data frontend sends for OTP verification — email, otp, newPassword.TransactionRequest.javaShape of data frontend sends to create/update a transaction — amount, type, category, date, description. Has validation annotations.TransactionResponse.javaShape of data backend sends back for a transaction — id, type, amount, category, date, description, createdAt.
+
+📁 repository/ — Database query layer
+FileWhat it doesUserRepo.javaTalks to users table. Has findByEmail() — used during login and JWT filter.OtpTokensRepo.javaTalks to otp_tokens table. Has findByEmail() — used during OTP verification.TransactionRepo.javaTalks to transactions table. Has custom query methods — find by user, filter by type, filter by date range, filter by both. Spring auto-generates the SQL from the method names.
+
+📁 service/ — Business logic layer
+FileWhat it doesAuthService.javaAll auth logic — signup (hash password, save user), signin (check password, generate JWT), send OTP email, verify OTP, update name, delete account.EmailService.javaSends emails using Spring Mail. Called by AuthService when OTP needs to be emailed.UserDetailsServiceCustom.javaSpring Security needs this. When JWT filter gets an email from a token, this loads the user from DB so Spring knows who they are.TransactionService.javaAll transaction logic — add, get (with filters), update, delete, export to Excel (Apache POI), export to PDF (iText).
+
+📁 security/ — JWT and security setup
+FileWhat it doesJwtUtils.javaJWT toolkit — generates a token from email, validates a token, extracts email from token.JwtAuthFilter.javaRuns on every request. Reads the Authorization: Bearer <token> header, validates it, and tells Spring Security who the user is.SecurityConfig.javaMain security setup — which URLs are public (/api/auth/**) vs protected, CSRF disabled, CORS configured for React on port 3000, JWT filter wired in.
+
+📁 controller/ — API endpoints (doors to the backend)
+FileWhat it doesAuthController.javaHandles: POST signup, POST signin, POST forgot-password, POST verify-otp, GET me, PUT update-name, DELETE delete-account.TransactionController.javaHandles: POST add transaction, GET all transactions (with filters), PUT update transaction, DELETE transaction, GET export/excel, GET export/pdf.
+
+📁 Root backend files
+FileWhat it doesMoneyManagerApplication.javaThe main class. Just has main() — starts the whole Spring Boot app.pom.xmlMaven config. Lists all dependencies — Spring Boot, MySQL, JWT, Lombok, POI (Excel), iText (PDF).
+
+🔄 How a request flows end to end
+User fills form → React page
+→ calls api.js function
+→ HTTP request hits Controller
+→ Controller calls Service
+→ Service calls Repository
+→ Repository queries MySQL
+→ data comes back up the chain
+→ Response DTO returned to frontend
+→ React updates the UI
+
+
+

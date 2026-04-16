@@ -43,6 +43,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/**"   // all auth routes: signup, signin, forgot-password, etc.
                         ).permitAll()
+                        .requestMatchers("/api/transactions/**").authenticated()
+
 
                         // Everything else requires a valid JWT token
                         .anyRequest().authenticated()

@@ -42,7 +42,6 @@ export default function SigninPage() {
       <div className="auth-logo">
         <div className="auth-logo-icon">💰</div>
         <h1 className="auth-logo-name">MoneyManager</h1>
-        <p className="auth-logo-sub">Financial Intelligence</p>
       </div>
 
       <div className="auth-card">

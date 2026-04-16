@@ -83,12 +83,10 @@ export default function SignupPage() {
       <div className="auth-logo">
         <div className="auth-logo-icon">💰</div>
         <h1 className="auth-logo-name">MoneyManager</h1>
-        <p className="auth-logo-sub">Financial Intelligence</p>
       </div>
 
       <div className="auth-card">
         <h2 className="auth-card-title">Create Account</h2>
-        <p className="auth-card-sub">Join the curated financial experience.</p>
 
         {serverError && <div className="error-banner">{serverError}</div>}
 

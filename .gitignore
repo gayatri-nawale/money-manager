@@ -1,37 +1,41 @@
-HELP.md
+# ========================
+# SENSITIVE - NEVER PUSH
+# ========================
+src/main/resources/application.properties
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+
+# ========================
+# Java / Maven (Backend)
+# ========================
 target/
+*.class
+*.jar
+*.war
+*.ear
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+hs_err_pid*
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# ========================
+# React / Node (Frontend)
+# ========================
+moneymanager-frontend/node_modules/
+moneymanager-frontend/build/
+moneymanager-frontend/.env
+moneymanager-frontend/.env.local
+moneymanager-frontend/.env.production
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# ========================
+# IDE Files
+# ========================
+.idea/
 *.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
 .vscode/
-node_modules/
-.env
-build/
-target/
+*.suo
+*.user
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db
