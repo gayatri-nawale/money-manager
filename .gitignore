@@ -1,0 +1,41 @@
+# ========================
+# SENSITIVE - NEVER PUSH
+# ========================
+src/main/resources/application.properties
+src/main/resources/application-dev.properties
+src/main/resources/application-prod.properties
+
+# ========================
+# Java / Maven (Backend)
+# ========================
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/wrapper/maven-wrapper.jar
+hs_err_pid*
+
+# ========================
+# React / Node (Frontend)
+# ========================
+moneymanager-frontend/node_modules/
+moneymanager-frontend/build/
+moneymanager-frontend/.env
+moneymanager-frontend/.env.local
+moneymanager-frontend/.env.production
+
+# ========================
+# IDE Files
+# ========================
+.idea/
+*.iml
+.vscode/
+*.suo
+*.user
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db

@@ -1,0 +1,162 @@
+/* ── Profile page wrapper ── */
+.prof-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Avatar card ── */
+.prof-avatar-card {
+  background: #fff;
+  border: 1px solid #e8edf3;
+  border-radius: 20px;
+  padding: 36px 24px 28px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.prof-avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #1a4f8a;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.prof-fullname {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2a3a;
+  margin: 0 0 6px;
+}
+
+.prof-email {
+  font-size: 15px;
+ color:#696c6e;
+  margin: 0;
+}
+
+/* ── Info / action cards ── */
+.prof-card {
+  background: #fff;
+  border: 1px solid #e8edf3;
+  border-radius: 20px;
+  padding: 28px 28px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.prof-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a2a3a;
+  margin: 0 0 4px;
+}
+
+.prof-card-sub {
+  font-size: 12px;
+  color: #8a9bb0;
+  margin: 0 0 20px;
+}
+
+/* ── Input ── */
+.prof-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: #8a9bb0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.prof-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: #edf1f7;
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1a2a3a;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  transition: border 0.2s, background 0.2s;
+  outline: none;
+}
+
+.prof-input:focus {
+  border-color: #1a4f8a;
+  background: #fff;
+}
+
+/* ── Primary button ── */
+.prof-btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: #1a4f8a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.prof-btn-primary:hover { opacity: 0.88; }
+
+/* ── Actions row (logout + delete side by side) ── */
+.prof-actions-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.prof-btn-outline {
+  flex: 1;
+  padding: 13px;
+  background: #fff;
+  color: #1a2a3a;
+  border: 1.5px solid #dde3ea;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.prof-btn-outline:hover { background: #f4f7fb; }
+
+.prof-btn-danger {
+  flex: 1;
+  padding: 13px;
+  background: #fde8e8;
+  color: #c0392b;
+  border: 1.5px solid #f5c6c6;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.prof-btn-danger:hover { background: #fbd5d5; }
+
+/* ── Danger note ── */
+.prof-danger-note {
+  font-size: 11px;
+  color: #b0b8c4;
+  margin: 0;
+  text-align: center;
+}
